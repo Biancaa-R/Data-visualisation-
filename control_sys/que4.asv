@@ -1,0 +1,21 @@
+%que 3
+clc;
+close all;
+clear all;
+
+num=k;
+den=[T 2];
+gs=tf(num,den);
+den=[den num];
+cl_tf=tf(num,den);
+
+disp(cl_tf);
+if (den(1)~=1)
+    num=num(1)/den(1);
+    for i=1:length(den)
+        den=den/den(1);
+    end
+end
+disp(num);
+disp(den);
+

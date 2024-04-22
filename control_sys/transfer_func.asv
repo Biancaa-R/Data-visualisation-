@@ -1,0 +1,12 @@
+num=[144];
+den=[2 24 144];
+tf1=tf(num,den);
+%disp(tf1);
+if (den(1)~=1)
+    num=num(1)/den(1);
+    for i=1:length(den)
+        den(i)=den(i)/den(1);
+    end
+end
+disp(num);
+disp(den);
