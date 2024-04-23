@@ -9,10 +9,12 @@ Fl2=40000;
 Fl3=50000;
 Fl4=10000;
 
-Flc=20000;
+F1=20000;
+F2=45000;
 Fs=300000;
 
-Wc=2*pi*(Flc/Fs);
+Wc1=2*pi*(F1/Fs);
+Wc2=2*pi*(F2/Fs);
 t=0:1/(Fs):0.1;
 
 x=sin(2*pi*Fl1*t)+sin(2*pi*Fl2*t)+sin(2*pi*Fl3*t)+sin(2*pi*Fl4*t);
@@ -36,9 +38,9 @@ plot(fr,abs(dft_x(1:D/2)));
 
 for n= -(M-1)/2 : (M-1)/2
     if n==0
-        hd(n+ (M+1)/2)=Wc/pi;
+        hd(n+ (M+1)/2)=(Wc2-Wc1)/pi;
     else 
-        hd(n+(M+1)/2)=sin(Wc*n)/(pi*n);
+        hd(n+(M+1)/2)=(sin(Wc2)-sin(Wc1))/(pi*n);
     end
 end
 

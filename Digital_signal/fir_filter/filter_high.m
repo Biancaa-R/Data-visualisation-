@@ -36,9 +36,9 @@ plot(fr,abs(dft_x(1:D/2)));
 
 for n= -(M-1)/2 : (M-1)/2
     if n==0
-        hd(n+ (M+1)/2)=Wc/pi;
+        hd(n+ (M+1)/2)=(pi-Wc)/pi;
     else 
-        hd(n+(M+1)/2)=sin(Wc*n)/(pi*n);
+        hd(n+(M+1)/2)=(sin(pi*n)-sin(Wc*n))/(pi*n);
     end
 end
 
