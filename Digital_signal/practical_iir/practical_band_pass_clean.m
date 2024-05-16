@@ -1,4 +1,4 @@
-%for getting clean audio but sb wont let me plot it in rec 
+%for getting clean audio but sb sir wont let me plot it in rec 
 %so to try out what I wanna do...
 %actully since the graph looks good now actually he might let..
 %The gain plot is in frequencies and not as db here
