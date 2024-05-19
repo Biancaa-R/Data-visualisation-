@@ -56,3 +56,19 @@ grid on;
 mag=squeeze(mag);
 omega_des = interp1( mag, wout,1);
 disp(omega_des)
+
+%{
+The gain crossover frequency (GCF) is determined primarily by the system's open-loop transfer function. When you adjust the gain of the system, you are essentially modifying the magnitude response of the system. However, changing the gain does not directly affect the location of the gain crossover frequency; it only alters the gain magnitude at that frequency.
+
+In your code, the gain adjustment was made to achieve a desired gain magnitude at a specific frequency (1.5 rad/s), but it did not directly shift the location of the gain crossover frequency. That's why even though you adjusted the gain to make the magnitude 0 dB at 1.5 rad/s, the actual GCF remained unchanged.
+
+So, despite the gain adjustment, the gain crossover frequency remained the same as in the original system because the structure of the transfer function (the poles and zeros) did not change.
+
+If you need to change the location of the gain crossover frequency, you would typically need to modify the system's dynamics by adding poles or zeros or adjusting their locations. Simply adjusting the gain won't shift the crossover frequency.
+
+%}
+
+
+
+
+
