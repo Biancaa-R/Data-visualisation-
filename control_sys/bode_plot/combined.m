@@ -23,7 +23,8 @@ choice= input("Enter 1 for gm, 2 for pm and 3 for wgc variation");
 switch choice
 
     case 1
-        gm_des = 30;
+        %gm_des = 30;
+        gm_des=input("Enter the desired gain margin");
 
         % Calculate the required gain adjustment
         gm_db = 20 * log10(gm);  % Convert gm to dB
@@ -50,7 +51,8 @@ switch choice
 
     case 2
         % Desired phase margin in degrees
-        pm_des = 30;
+        %pm_des = 30;
+        pm_des=input("Enter the desired phase margin");
         
         % Calculate the phase value corresponding to the desired phase margin at the gain crossover frequency
         gcf_phase_desired = -180 + pm_des;
@@ -90,7 +92,8 @@ switch choice
 
     case 3
         % Desired gain crossover frequency
-        gcf_des = 1.5;
+        %gcf_des = 1.5;
+        gcf_des=input("Enter the desired gain cross over frequency");
         
         % Obtain the magnitude and phase at the desired frequency
         [mag, phase, wout] = bode(sys_tf, w);
@@ -117,5 +120,9 @@ switch choice
         [mag, phase, wout] = bode(sys_tf_adjusted, w);
         mag=squeeze(mag);
         omega_des = interp1( mag, wout,1);
-        disp(omega_des)
+        disp(omega_des);
+        [gm, pm, gcf, pcf] = margin(sys_tf_adjusted);
+        value = [gm, pm, pcf];
+        disp('Adjusted system margins:');
+
 end
