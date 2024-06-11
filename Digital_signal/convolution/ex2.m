@@ -1,3 +1,6 @@
+clc;
+clear all;
+close all;
 t=-3:1:3;
 x=[0 0 1 2 3 4 0 ];
 subplot(2,2,1);
