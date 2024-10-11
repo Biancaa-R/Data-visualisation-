@@ -19,7 +19,7 @@ for i = 1:n
     end
 end
 
-% BPSK parameters
+% BFSK parameters
 bit_duration = 1; 
 sampling_rate = 100;    
 T = 1;                
@@ -51,30 +51,30 @@ title('Digital Signal');
 axis([0 n -0.5 1.5]);
 grid on;
 
-t_bpsk = 0:1/sampling_rate:n;
+t_bfsk = 0:1/sampling_rate:n;
 
-% BPSK signal
-bpsk_signal = zeros(1, length(t_bpsk));
+% BFSK signal
+bfsk_signal = zeros(1, length(t_bfsk));
 for i = 1:n
     t_idx = (i-1)*sampling_rate + 1:i*sampling_rate; 
     if seq(i) == 1
-        bpsk_signal(t_idx) = A * cos(2*pi*f1*t_bpsk(t_idx)); 
+        bfsk_signal(t_idx) = A * cos(2*pi*f1*t_bfsk(t_idx)); 
     else
-        bpsk_signal(t_idx) = (A * cos(2*pi*f2*t_bpsk(t_idx))); 
+        bfsk_signal(t_idx) = (A * cos(2*pi*f2*t_bfsk(t_idx))); 
     end
 end
 
 subplot(2,1,2); 
-plot(t_bpsk, bpsk_signal,'LineWidth', 1,'Color','b');
+plot(t_bfsk, bfsk_signal,'LineWidth', 1,'Color','b');
 xlabel('Time (s)');
 ylabel('Amplitude');
 title('BFSK Signal');
 grid on;
 
-%noise=randn(t_bpsk);
-noise =randn(1,length(bpsk_signal));
+%noise=randn(t_bfsk);
+noise =randn(1,length(bfsk_signal));
 noise=noise./100;
-bpsk_signal_new=bpsk_signal+noise;
+bfsk_signal_new=bfsk_signal+noise;
 
 
 
@@ -84,11 +84,11 @@ for i = 1:n
     start_idx = (i-1)*sampling_rate*bit_duration + 1;
     end_idx = i*sampling_rate*bit_duration;
     
-    if bpsk_signal(t_idx) == A * cos(2*pi*f1*t_bpsk(t_idx))
+    if bfsk_signal(t_idx) == A * cos(2*pi*f1*t_bfsk(t_idx))
         decoded_signal(start_idx:end_idx) = 1;
         
     else
-        %bpsk_signal(t_idx) = (A * cos(2*pi*f2*t_bpsk(t_idx))); 
+        %bfsk_signal(t_idx) = (A * cos(2*pi*f2*t_bfsk(t_idx))); 
         decoded_signal(start_idx:end_idx) = 0;
     end
 end
@@ -103,7 +103,7 @@ axis([0 n -0.5 1.5]);
 grid on;
 
 subplot(2,1,2); 
-plot(t_bpsk, bpsk_signal_new,'LineWidth', 1,'Color','b');
+plot(t_bfsk, bfsk_signal_new,'LineWidth', 1,'Color','b');
 xlabel('Time (s)');
 ylabel('Amplitude');
 title('BFSK Signal');
