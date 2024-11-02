@@ -49,11 +49,11 @@ grid on;
 
 
 for a = 1:(n/2)
-    seq1(a)=seq(a+(a-1))
+    seq1(a)=seq(a+(a-1));
 end
 
 for a = 1:(n/2)
-    seq2(a)=seq(a*2)
+    seq2(a)=seq(a*2);
 end
 
 bit_duration= 2; 
@@ -136,7 +136,7 @@ grid on;
 
 combined=qpsk_signal+qpsk_quadsignal;
 
-subplot(4,2,[7,8])
+subplot(4,2,[7,8]);
 plot(t_qpsk,combined,'Linewidth',2);
 xlabel('Time (s)');
 ylabel('Amplitude');

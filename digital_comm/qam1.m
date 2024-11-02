@@ -50,7 +50,9 @@ bit_duration = 1;
 sampling_rate = 100;    
 fc = 10;  % Carrier frequency
 
-t_qam = 0:1/sampling_rate:n;  % Time for the QAM signal
+%t_qam = 0:1/sampling_rate:n;  % Time for the QAM signal
+t_qam = 0:1/sampling_rate:(n*bit_duration - 1/sampling_rate);
+
 
 % Generate QAM signal (In-phase and Quadrature components)
 in_phase_signal = inp_level * cos(2 * pi * fc * t_qam);
@@ -105,27 +107,26 @@ disp('In-phase Integrated Value:');
 disp(in_phase_integrated);
 disp('Quadrature Integrated Value:');
 disp(quad_phase_integrated);
-
 % Detect In-phase bits (bits 1 and 2)
 if in_phase_integrated >= 2
-    detected_bits(1:2) = [1, 0];  % Correct detection for higher in-phase levels
-elseif in_phase_integrated > 0
-    detected_bits(1:2) = [1, 1];  % This corresponds to mid-range in-phase levels
-elseif in_phase_integrated > -2  % Handle values close to -2 more robustly
-    detected_bits(1:2) = [0, 1];  % Slightly adjust the threshold
+    detected_bits(1:2) = [0, 1];  % Detect for higher in-phase levels (near +3)
+elseif in_phase_integrated >= 0  % Include the edge case where in_phase_integrated == 0
+    detected_bits(1:2) = [1, 1];  % Mid-range in-phase levels (near +1)
+elseif in_phase_integrated > -2  % Handle mid-range negative in-phase levels (near -1)
+    detected_bits(1:2) = [1, 0];
 else
-    detected_bits(1:2) = [0, 0];  % Detect lower in-phase levels
+    detected_bits(1:2) = [0, 0];  % Detect lower in-phase levels (near -3)
 end
 
 % Detect Quadrature bits (bits 3 and 4)
 if quad_phase_integrated >= 2
-    detected_bits(3:4) = [1, 0];  % Higher quadrature level detection
-elseif quad_phase_integrated > 0
-    detected_bits(3:4) = [1, 1];  % Mid-range quadrature levels
-elseif quad_phase_integrated > -2
-    detected_bits(3:4) = [0, 1];  % Adjust this threshold slightly as well
+    detected_bits(3:4) = [0, 1];  % Detect higher quadrature levels (near +3)
+elseif quad_phase_integrated >= 0  % Include the edge case where quad_phase_integrated == 0
+    detected_bits(3:4) = [1, 1];  % Mid-range quadrature levels (near +1)
+elseif quad_phase_integrated > -2  % Handle mid-range negative quadrature levels (near -1)
+    detected_bits(3:4) = [0, 0];
 else
-    detected_bits(3:4) = [0, 0];  % Lower quadrature levels
+    detected_bits(3:4) = [1, 0];  % Detect lower quadrature levels (near -3)
 end
 
 
