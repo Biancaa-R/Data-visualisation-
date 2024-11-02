@@ -1,3 +1,4 @@
+%THE LOGIC IS SLIGHTLY FLAWED --- ILL FIX IT SHORTLY
 clc;
 clear;
 close all;
