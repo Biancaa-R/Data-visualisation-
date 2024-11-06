@@ -1,7 +1,7 @@
 clc;
 clear all;
 close all;
-SNRdB= -8:1:12;
+SNRdB= -20:1:12;
 SNR= 10.^(SNRdB/10);
 N=10^5;
 x= randsrc(1,N, [0,1]);
